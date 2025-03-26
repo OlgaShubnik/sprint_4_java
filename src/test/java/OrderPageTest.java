@@ -1,4 +1,6 @@
 import edu.prakticum.sprint4.OrderPage;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -6,9 +8,15 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class OrderPageTest {
 
+    private WebDriver webDriver;
+
+    @Before
+    public void initWebDriver() {
+        webDriver = new FirefoxDriver();
+    }
+
     @Test
     public void testOrderFromTopButtonIvanov() {
-        WebDriver webDriver = new FirefoxDriver();
         OrderPage page = new OrderPage(webDriver);
         page.open();
         page.clickOrderTopButton();
@@ -26,13 +34,10 @@ public class OrderPageTest {
         page.clickYesButton();
 
         page.checkSuccessOrder();
-
-        webDriver.quit();
     }
 
     @Test
     public void testOrderFromTopButtonSidorov() {
-        WebDriver webDriver = new FirefoxDriver();
         OrderPage page = new OrderPage(webDriver);
         page.open();
         page.clickOrderBottomButton();
@@ -50,7 +55,10 @@ public class OrderPageTest {
         page.clickYesButton();
 
         page.checkSuccessOrder();
+    }
 
+    @After
+    public void quitWebDriver() {
         webDriver.quit();
     }
 }
